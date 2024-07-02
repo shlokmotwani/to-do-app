@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -7,4 +8,9 @@ module.exports = {
         path : path.resolve(__dirname, "dist"),
     },
     mode: "none",
+    plugins: [new HtmlWebpackPlugin({
+        title: "ToDo App",
+        inject: "body",
+    })],
+    devtool: "inline-source-map",
 }
