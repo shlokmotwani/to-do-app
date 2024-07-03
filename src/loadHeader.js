@@ -2,16 +2,28 @@ import { sidebar } from "./loadSidebar";
 import { homePage } from "./loadHomePage";
 
 let header;
+let headerLeft;
+let headerCenter;
+let headerRight;
 let hideSidebarBtn;
 let isSidebarVisible = true;
 
 export function loadHeader() {
   header = document.createElement("div");
   header.id = "div-header";
+  headerLeft = document.createElement("div");
+  headerLeft.id = "div-header-left";
+  headerCenter = document.createElement("div");
+  headerCenter.id = "div-header-center";
+  headerRight = document.createElement("div");
+  headerRight.id = "div-header-right";
+
   hideSidebarBtn = document.createElement("button");
   hideSidebarBtn.id = "hide-sidebar-btn";
-  hideSidebarBtn.textContent = "I/O";
-  header.appendChild(hideSidebarBtn);
+  headerLeft.appendChild(hideSidebarBtn);
+  header.appendChild(headerLeft);
+  header.appendChild(headerCenter);
+  header.appendChild(headerRight);
 
   hideSidebarBtn.addEventListener("click", () => {
     console.log("Hide Sidebar Button clicked");

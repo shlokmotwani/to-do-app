@@ -27,11 +27,26 @@ div{
 }
 
 #div-header{
-    background-color: blue;
     grid-area: hdr;
+    display: flex;
+    justify-content: space-between;
+}
+
+#div-header>div{
+    border: 1px solid black;
+}
+
+#div-header-left{
+    width: 20%;
+}
+
+#div-header-right{
+    width: 20%;
 }
 
 #hide-sidebar-btn{
+    background-image: url(./icons/hamburger-icon.svg);
+    background-repeat: no-repeat;
     width: 100px;
     height: 25px;
 }
