@@ -16,7 +16,7 @@ div{
   height: 100%;
 }
 
-#div-main{
+#div-home-page{
     display: grid;
     grid-template-columns: 20% 80%;
     grid-template-rows: 10% 87% 3%;
