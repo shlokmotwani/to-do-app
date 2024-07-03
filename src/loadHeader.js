@@ -7,6 +7,10 @@ let headerCenter;
 let headerRight;
 let hideSidebarBtn;
 let isSidebarVisible = true;
+let logoImage;
+let logoText;
+let logoTextLeft;
+let logoTextRight;
 
 export function loadHeader() {
   header = document.createElement("div");
@@ -53,8 +57,22 @@ export function loadHeader() {
       "ftr ftr";`;
     }
   });
+
+  logoImage = document.createElement('div');
+  logoImage.id = 'logo-image';
+  logoText = document.createElement('div');
+  logoText.id = 'logo-text';
+  logoTextLeft = document.createElement('span');
+  logoTextLeft.id = 'logo-text-left';
+  logoTextLeft.textContent = 'To';
+  logoTextRight = document.createElement('span');
+  logoTextRight.id = 'logo-text-right';
+  logoTextRight.textContent = 'Do';
+  logoText.appendChild(logoTextLeft);
+  logoText.appendChild(logoTextRight);
+
+  headerCenter.appendChild(logoImage);
+  headerCenter.appendChild(logoText);
 }
 
-export { header, hideSidebarBtn, isSidebarVisible };
-
-//abdcd
+export { header };
