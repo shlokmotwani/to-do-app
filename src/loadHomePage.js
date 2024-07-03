@@ -11,7 +11,7 @@ let homePage;
 
 export function loadHomePage() {
   homePage = document.createElement("div");
-  homePage.id = "div-homepage";
+  homePage.id = "div-home-page";
   loadHeader();
   loadSidebar();
   loadContent();
