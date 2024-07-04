@@ -1,4 +1,4 @@
-import { header, hideSidebarBtn, isSidebarVisible } from "./loadHeader";
+import { header } from "./loadHeader";
 import { loadHeader } from "./loadHeader";
 import { sidebar } from "./loadSidebar";
 import { loadSidebar } from "./loadSidebar";

@@ -4,7 +4,15 @@ import { loadHomePage } from "./loadHomePage";
 import { mainDiv, header, sidebar, content, footer } from "./loadHomePage";
 import "./style.css";
 
+let allProjects = [];
+
 let gym = createProject("Gym");
+allProjects.push(gym);
+let dance = createProject("Dance");
+allProjects.push(dance);
+let study = createProject("Study");
+allProjects.push(study);
+
 let gymTaskOne = createTask(
   "Go to gym",
   "check out all gyms",
@@ -34,6 +42,6 @@ gym.tasks.push(gymTaskOne);
 gym.tasks.push(gymTaskTwo);
 gym.tasks.push(gymTaskThree);
 
-console.log(gym);
 loadHomePage();
-console.log("Main div = " + header.id);
+
+export {allProjects};

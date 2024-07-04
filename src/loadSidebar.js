@@ -1,18 +1,24 @@
 let sidebar;
 let homeCard;
-let projectCard;
 let homeCardTitle;
 let homeCardLine;
+let projectCard;
+let projectCardTitle;
+let projectCardLine;
 
 import allTasksImage from "./icons/inbox.svg";
 import todayImage from "./icons/calendar.svg";
 import next7daysImage from "./icons/content-duplicate.svg";
 import importantImage from "./icons/star.svg";
+import minusImage from "./icons/minus.svg";
+import { allProjects } from "./index.js";
 
 let allTasksIcon = new Image();
 let todayIcon = new Image();
 let next7daysIcon = new Image();
 let importantIcon = new Image();
+let minusIcon;
+
 
 allTasksIcon.src = allTasksImage;
 todayIcon.src = todayImage;
@@ -38,55 +44,71 @@ let homeCategories = [
   },
 ];
 
-export function loadSidebar() {
-  sidebar = document.createElement("div");
-  sidebar.id = "div-sidebar";
-
+function loadHomeCard() {
   homeCard = document.createElement("div");
   homeCard.id = "home-card";
-  homeCard.style.cssText = `
-  padding: 20px;`;
+
   homeCardTitle = document.createElement("p");
   homeCardTitle.textContent = "Home";
-  homeCardTitle.style.cssText = `
-  font-size: 1.8rem;
-  margin-bottom: 10px;`;
   homeCardLine = document.createElement("hr");
 
   homeCard.appendChild(homeCardTitle);
   homeCard.appendChild(homeCardLine);
-
-
 
   for (let i = 0; i < homeCategories.length; i++) {
     let category = document.createElement("div");
     let categoryIcon = document.createElement("div");
     console.log(homeCategories[i].icon);
     categoryIcon.appendChild(homeCategories[i].icon);
-    categoryIcon.style.cssText = `
-    width: 2.0rem;
-    height: 2.0rem;`;
+
     let categoryText = document.createElement("p");
     categoryText.textContent = homeCategories[i].text;
-
-    category.style.cssText = `
-    display: flex;
-    height: fit-content;
-    margin-top: 30px;
-    align-items: center;
-    font-size: 1.2rem;`;
 
     category.appendChild(categoryIcon);
     category.appendChild(categoryText);
 
     homeCard.appendChild(category);
   }
+}
 
+function loadProjectCard() {
   projectCard = document.createElement("div");
   projectCard.id = "project-card";
+
+  projectCardTitle = document.createElement("p");
+  projectCardTitle.textContent = "Projects";
+  projectCardLine = document.createElement("hr");
+
+  projectCard.appendChild(projectCardTitle);
+  projectCard.appendChild(projectCardLine);
+
+  for (let i = 0; i < allProjects.length; i++) {
+    let project = document.createElement("div");
+    let projectIcon = document.createElement("div");
+    minusIcon = new Image();
+    minusIcon.src = minusImage;
+    console.log("Minus icon = " + minusIcon);
+    projectIcon.appendChild(minusIcon);
+
+    let projectText = document.createElement("p");
+    projectText.textContent = allProjects[i].name;
+
+    project.appendChild(projectIcon);
+    project.appendChild(projectText);
+
+    projectCard.appendChild(project);
+  }
+}
+
+export function loadSidebar() {
+  sidebar = document.createElement("div");
+  sidebar.id = "div-sidebar";
+
+  loadHomeCard();
+  loadProjectCard();
 
   sidebar.appendChild(homeCard);
   sidebar.appendChild(projectCard);
 }
 
-export { sidebar };
+export { sidebar, homeCard, projectCard };
