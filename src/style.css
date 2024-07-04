@@ -19,6 +19,7 @@ div {
   height: 100%;
 }
 
+/* any change here should also be made in loadHeader.js */
 #div-home-page {
   display: grid;
   grid-template-columns: 200px 1fr;
