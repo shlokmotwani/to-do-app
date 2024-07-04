@@ -18,7 +18,7 @@ let gymTaskOne = createTask(
   "check out all gyms",
   "01/01/2025",
   "high",
-  "nikal jaldi ghar se",
+  "leave your house on time",
   true
 );
 
@@ -27,15 +27,15 @@ let gymTaskTwo = createTask(
   "Get done with gym and trainers",
   "01/01/2025",
   "high",
-  "koi bhi trainer le le yaar"
+  "choose a trainer with certification"
 );
 
 let gymTaskThree = createTask(
-  "GStart working out",
+  "Start working out",
   "Follow PPL routine",
   "01/01/2025",
   "low",
-  "goood"
+  "Rest for 1-2 minutes in b/w sets"
 );
 
 gym.tasks.push(gymTaskOne);
