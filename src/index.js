@@ -1,7 +1,6 @@
 import { createProject } from "./project";
 import { createTask } from "./task";
 import { loadHomePage } from "./loadHomePage";
-import { mainDiv, header, sidebar, content, footer } from "./loadHomePage";
 import "./style.css";
 
 let allProjects = [];
@@ -11,6 +10,12 @@ allProjects.push(gym);
 let dance = createProject("Dance");
 allProjects.push(dance);
 let study = createProject("Study");
+allProjects.push(study);
+allProjects.push(study);
+allProjects.push(study);
+allProjects.push(study);
+allProjects.push(study);
+allProjects.push(study);
 allProjects.push(study);
 
 let gymTaskOne = createTask(
@@ -44,4 +49,4 @@ gym.tasks.push(gymTaskThree);
 
 loadHomePage();
 
-export {allProjects};
+export { allProjects };

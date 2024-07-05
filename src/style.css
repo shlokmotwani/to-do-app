@@ -86,6 +86,7 @@ div {
   grid-area: sbr;
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
 
 #home-card,

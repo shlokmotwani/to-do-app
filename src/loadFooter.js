@@ -4,7 +4,7 @@ let leftDiv;
 let centerDiv;
 let rightDiv;
 
-import heartImage from './icons/heart.svg';
+import heartImage from "./icons/heart.svg";
 
 export function loadFooter() {
   footer = document.createElement("div");
@@ -34,7 +34,6 @@ export function loadFooter() {
   wrapper.appendChild(rightDiv);
 
   footer.appendChild(wrapper);
-
 }
 
 export { footer };

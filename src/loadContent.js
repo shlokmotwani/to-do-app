@@ -1,8 +1,8 @@
 let content;
 
-export function loadContent() {
+function loadContent() {
   content = document.createElement("div");
   content.id = "div-content";
 }
 
-export { content };
+export { content, loadContent };

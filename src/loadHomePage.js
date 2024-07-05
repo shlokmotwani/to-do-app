@@ -1,15 +1,11 @@
-import { header } from "./loadHeader";
-import { loadHeader } from "./loadHeader";
-import { sidebar } from "./loadSidebar";
-import { loadSidebar } from "./loadSidebar";
-import { content } from "./loadContent";
-import { loadContent } from "./loadContent";
-import { footer } from "./loadFooter";
-import { loadFooter } from "./loadFooter";
+import { header, loadHeader } from "./loadHeader";
+import { sidebar, loadSidebar } from "./loadSidebar";
+import { content, loadContent } from "./loadContent";
+import { footer, loadFooter } from "./loadFooter";
 
 let homePage;
 
-export function loadHomePage() {
+function loadHomePage() {
   homePage = document.createElement("div");
   homePage.id = "div-home-page";
   loadHeader();
@@ -26,4 +22,4 @@ export function loadHomePage() {
   console.log(homePage);
 }
 
-export { homePage, header, sidebar, content, footer };
+export { homePage, loadHomePage};

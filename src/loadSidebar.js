@@ -1,3 +1,10 @@
+import allTasksImage from "./icons/inbox.svg";
+import todayImage from "./icons/calendar.svg";
+import next7daysImage from "./icons/content-duplicate.svg";
+import importantImage from "./icons/star.svg";
+import minusImage from "./icons/minus.svg";
+import { allProjects } from "./index.js";
+
 let sidebar;
 let homeCard;
 let homeCardTitle;
@@ -6,19 +13,11 @@ let projectCard;
 let projectCardTitle;
 let projectCardLine;
 
-import allTasksImage from "./icons/inbox.svg";
-import todayImage from "./icons/calendar.svg";
-import next7daysImage from "./icons/content-duplicate.svg";
-import importantImage from "./icons/star.svg";
-import minusImage from "./icons/minus.svg";
-import { allProjects } from "./index.js";
-
 let allTasksIcon = new Image();
 let todayIcon = new Image();
 let next7daysIcon = new Image();
 let importantIcon = new Image();
 let minusIcon;
-
 
 allTasksIcon.src = allTasksImage;
 todayIcon.src = todayImage;
@@ -100,7 +99,7 @@ function loadProjectCard() {
   }
 }
 
-export function loadSidebar() {
+function loadSidebar() {
   sidebar = document.createElement("div");
   sidebar.id = "div-sidebar";
 
@@ -111,4 +110,4 @@ export function loadSidebar() {
   sidebar.appendChild(projectCard);
 }
 
-export { sidebar, homeCard, projectCard };
+export { sidebar, loadSidebar };
