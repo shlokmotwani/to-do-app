@@ -38,7 +38,7 @@ export function loadHeader() {
 
       homePage.style.cssText = `display: grid;
       grid-template-columns: 200px 1fr;
-      grid-template-rows: 7% 90% 3%;
+      grid-template-rows: 7fr 90fr 3fr;
       grid-template-areas: 
       "hdr hdr"
       "cnt cnt"
@@ -50,7 +50,7 @@ export function loadHeader() {
 
       homePage.style.cssText = `display: grid;
       grid-template-columns: 200px 1fr;
-      grid-template-rows: 7% 90% 3%;
+      grid-template-rows: 7fr 90fr 3fr;
       grid-template-areas: 
       "hdr hdr"
       "sbr cnt"
