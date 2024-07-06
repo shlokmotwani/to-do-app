@@ -3,6 +3,7 @@ let innerDiv;
 let titleText;
 let addTaskBtn;
 let tasksDiv;
+let tasksToLoad = [];
 
 import plusImage from "./icons/plus-box-outline.svg";
 
@@ -39,62 +40,81 @@ function loadContent() {
   content.appendChild(innerDiv);
 
   loadTaskCard();
-  logAllTasks();
+  // logAllTasks();
+}
+
+function setTasksToLoad(projectName) {
+  tasksToLoad = [];
+  console.log("setTasksToLoad function called");
+  if (projectName == "All Tasks") {
+    for (let i = 0; i < allProjects.length; i++) {
+      for (let j = 0; j < allProjects[i].tasks.length; j++) {
+        tasksToLoad.push(allProjects[i].tasks[j]);
+      }
+    }
+  } else {
+    for (let i = 0; i < allProjects.length; i++) {
+      if (allProjects[i].name == projectName) {
+        tasksToLoad.push(...allProjects[i].tasks);
+      }
+    }
+  }
+  console.log(tasksToLoad);
 }
 
 function loadTaskCard() {
-  for(let i=0; i<allProjects.length; i++){
+  console.log("loadTaskCard has been called");
+  tasksDiv.innerHTML = "";
 
-    for(let j=0; j<allProjects[i].tasks.length; j++){
-      let taskCard = document.createElement("div");
-      let title = document.createElement("div");
-      let desc = document.createElement("div");
-      let dueDate = document.createElement("div");
-      let priority = document.createElement("div");
-      let notes = document.createElement("div");
-      let isCompleted = document.createElement("div");
-  
-      let titleText = document.createElement("span");
-      let descText = document.createElement("span");
-      let dueDateText = document.createElement("span");
-      let priorityText = document.createElement("span");
-      let notesText = document.createElement("span");
-      let isCompletedText = document.createElement("span");
-  
-      titleText.textContent = allProjects[i].tasks[j].title;
-      descText.textContent = allProjects[i].tasks[j].desc;
-      dueDateText.textContent = allProjects[i].tasks[j].dueDate;
-      priority.textContent = allProjects[i].tasks[j].priority;
-      notesText.textContent = allProjects[i].tasks[j].notes;
-      isCompletedText.textContent = allProjects[i].tasks[j].isCompleted;
-  
-      title.appendChild(titleText);
-      desc.appendChild(descText);
-      dueDate.appendChild(dueDateText);
-      priority.appendChild(priorityText);
-      notes.appendChild(notesText);
-      isCompleted.appendChild(isCompletedText);
-  
-      taskCard.appendChild(title);
-      taskCard.appendChild(desc);
-      taskCard.appendChild(dueDate);
-      taskCard.appendChild(priority);
-      taskCard.appendChild(notes);
-      taskCard.appendChild(isCompleted);
-  
-      tasksDiv.appendChild(taskCard);
-    }
+  for (let i = 0; i < tasksToLoad.length; i++) {
+    let taskCard = document.createElement("div");
+    let title = document.createElement("div");
+    let desc = document.createElement("div");
+    let dueDate = document.createElement("div");
+    let priority = document.createElement("div");
+    let notes = document.createElement("div");
+    let isCompleted = document.createElement("div");
+
+    let titleText = document.createElement("span");
+    let descText = document.createElement("span");
+    let dueDateText = document.createElement("span");
+    let priorityText = document.createElement("span");
+    let notesText = document.createElement("span");
+    let isCompletedText = document.createElement("span");
+
+    titleText.textContent = tasksToLoad[i].title;
+    descText.textContent = tasksToLoad[i].desc;
+    dueDateText.textContent = tasksToLoad[i].dueDate;
+    priority.textContent = tasksToLoad[i].priority;
+    notesText.textContent = tasksToLoad[i].notes;
+    isCompletedText.textContent = tasksToLoad[i].isCompleted;
+
+    title.appendChild(titleText);
+    desc.appendChild(descText);
+    dueDate.appendChild(dueDateText);
+    priority.appendChild(priorityText);
+    notes.appendChild(notesText);
+    isCompleted.appendChild(isCompletedText);
+
+    taskCard.appendChild(title);
+    taskCard.appendChild(desc);
+    taskCard.appendChild(dueDate);
+    taskCard.appendChild(priority);
+    taskCard.appendChild(notes);
+    taskCard.appendChild(isCompleted);
+
+    tasksDiv.appendChild(taskCard);
   }
 }
 
-function logAllTasks(){
+function logAllTasks() {
   console.log("logAllTasks has been called");
-  for(let i=0; i<allProjects.length; i++){
+  for (let i = 0; i < allProjects.length; i++) {
     console.log("Project Title : " + allProjects[i].name);
-    for(let j=0; j<allProjects[i].tasks.length; j++){
+    for (let j = 0; j < allProjects[i].tasks.length; j++) {
       console.log(allProjects[i].tasks[j].title);
     }
   }
 }
 
-export { content, loadContent, titleText };
+export { content, loadContent, titleText, setTasksToLoad, loadTaskCard };

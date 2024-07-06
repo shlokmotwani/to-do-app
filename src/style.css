@@ -178,9 +178,16 @@ div {
 
 #content-tasks > div{
   border: 2px solid black;
-  height: 100px;
-  margin-bottom: 10px;
+  border-radius: 15px;
+  height: fit-content;
+  padding: 20px;
+  margin: 10px 0;
   display: flex;
+}
+
+#content-tasks > div > div{
+  border: 1px solid black;
+  text-align: center;
 }
 
 #add-task-button {

@@ -9,6 +9,8 @@ import { allProjects } from "./index.js";
 import { createNewProjectModal } from "./project.js";
 import { content } from "./loadContent.js";
 import { titleText } from "./loadContent.js";
+import { setTasksToLoad } from "./loadContent.js";
+import { loadTaskCard } from "./loadContent.js";
 
 let sidebar;
 let homeCard;
@@ -18,6 +20,7 @@ let projectCard;
 let projectCardTitle;
 let projectCardLine;
 let addNewProjectBtn;
+let homeCategoryButtons = [];
 
 let allTasksIcon = new Image();
 let todayIcon = new Image();
@@ -65,6 +68,7 @@ function loadHomeCard() {
 
   for (let i = 0; i < homeCategories.length; i++) {
     let category = document.createElement("div");
+    category.classList.add("home-categories");
     let categoryIcon = document.createElement("div");
     categoryIcon.appendChild(homeCategories[i].icon);
 
@@ -74,8 +78,14 @@ function loadHomeCard() {
     category.appendChild(categoryIcon);
     category.appendChild(categoryText);
 
-    category.addEventListener("click", (event)=>{
-      titleText.textContent = categoryText.textContent;
+    // console.log(category);
+
+    homeCategoryButtons.push(category);
+
+    category.addEventListener("click", () => {
+      titleText.textContent = homeCategories[i].text;
+      setTasksToLoad(homeCategories[i].text);
+      loadTaskCard();
     });
 
     homeCard.appendChild(category);
@@ -96,14 +106,13 @@ function loadProjectCard() {
 
   for (let i = 0; i < allProjects.length; i++) {
     let project = document.createElement("div");
+    project.classList.add("project-categories");
     let projectIcon = document.createElement("div");
 
     // minusIcon has to be re-created in the loop
     // to append multiple unique elements to the project div
     minusIcon = new Image();
     minusIcon.src = minusImage;
-
-    console.log("Minus icon = " + minusIcon);
     projectIcon.appendChild(minusIcon);
 
     let projectText = document.createElement("p");
@@ -112,8 +121,10 @@ function loadProjectCard() {
     project.appendChild(projectIcon);
     project.appendChild(projectText);
 
-    project.addEventListener("click", (event)=>{
+    project.addEventListener("click", () => {
       titleText.textContent = projectText.textContent;
+      setTasksToLoad(projectText.textContent);
+      loadTaskCard();
     });
 
     projectCard.appendChild(project);
@@ -141,18 +152,18 @@ function loadSidebar() {
   sidebar.appendChild(projectCard);
 }
 
-function loadProjectModal(){
+function loadProjectModal() {
   console.log("addNewProject clicked");
 
   let modal = createNewProjectModal();
   modal.style.display = "block";
   content.append(modal);
 
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
-  }
+  };
 }
 
-export { sidebar, loadSidebar, loadProjectCard };
+export { sidebar, loadSidebar, loadProjectCard, homeCategoryButtons };

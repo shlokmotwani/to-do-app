@@ -1,6 +1,7 @@
 import { createProject } from "./project";
 import { createTask } from "./task";
 import { loadHomePage } from "./loadHomePage";
+import { homeCategoryButtons, lastBtnClicked } from "./loadSidebar";
 import "./style.css";
 import "./modal.css";
 
@@ -72,6 +73,10 @@ study.tasks.push(studyTaskTwo);
 study.tasks.push(studyTaskThree);
 
 loadHomePage();
+
+//Show all tasks by default
+homeCategoryButtons[0].click();
+lastBtnClicked = homeCategoryButtons[0];
 
 function addToProjects(project){
   allProjects.push(project);
