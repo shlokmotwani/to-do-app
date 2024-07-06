@@ -8,6 +8,7 @@ import { allProjects } from "./index.js";
 
 import { createNewProjectModal } from "./project.js";
 import { content } from "./loadContent.js";
+import { titleText } from "./loadContent.js";
 
 let sidebar;
 let homeCard;
@@ -65,7 +66,6 @@ function loadHomeCard() {
   for (let i = 0; i < homeCategories.length; i++) {
     let category = document.createElement("div");
     let categoryIcon = document.createElement("div");
-    console.log(homeCategories[i].icon);
     categoryIcon.appendChild(homeCategories[i].icon);
 
     let categoryText = document.createElement("p");
@@ -73,6 +73,10 @@ function loadHomeCard() {
 
     category.appendChild(categoryIcon);
     category.appendChild(categoryText);
+
+    category.addEventListener("click", (event)=>{
+      titleText.textContent = categoryText.textContent;
+    });
 
     homeCard.appendChild(category);
   }
@@ -107,6 +111,10 @@ function loadProjectCard() {
 
     project.appendChild(projectIcon);
     project.appendChild(projectText);
+
+    project.addEventListener("click", (event)=>{
+      titleText.textContent = projectText.textContent;
+    });
 
     projectCard.appendChild(project);
   }

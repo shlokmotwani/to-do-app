@@ -19,8 +19,6 @@ function loadHomePage() {
   homePage.appendChild(content);
   homePage.appendChild(footer);
   document.body.appendChild(homePage);
-
-  console.log(homePage);
 }
 
 export { homePage, loadHomePage};

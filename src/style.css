@@ -97,6 +97,13 @@ div {
   /* border: 1px solid black; */
 }
 
+#home-card>div:hover,
+#project-card>div:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  cursor: pointer;
+}
+
 /* home card and project card titles */
 #home-card > p,
 #project-card > p {
@@ -112,6 +119,7 @@ div {
   margin-top: 30px;
   align-items: center;
   font-size: 1rem;
+  padding: 2px;
 }
 
 #home-card > div > div:first-child,
@@ -128,6 +136,36 @@ div {
 #div-content {
   background-color: green;
   grid-area: cnt;
+}
+
+#div-innerDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: brown;
+}
+
+#content-title{
+  background-color: aqua;
+  flex: 1;
+  font-size: 2.7rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  width: 70%;
+  height: 50%;
+}
+
+#content-title > span{
+  margin-left: 50px;
+}
+
+#content-tasks{
+background-color: black;
+flex: 10;
 }
 
 #div-footer {
