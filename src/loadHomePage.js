@@ -6,6 +6,7 @@ import { footer, loadFooter } from "./loadFooter";
 let homePage;
 
 function loadHomePage() {
+  homePage = null;
   homePage = document.createElement("div");
   homePage.id = "div-home-page";
   loadHeader();

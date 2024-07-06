@@ -2,20 +2,15 @@ import { createProject } from "./project";
 import { createTask } from "./task";
 import { loadHomePage } from "./loadHomePage";
 import "./style.css";
+import "./modal.css";
 
 let allProjects = [];
 
 let gym = createProject("Gym");
-allProjects.push(gym);
+addToProjects(gym);
 let dance = createProject("Dance");
-allProjects.push(dance);
+addToProjects(dance);
 let study = createProject("Study");
-allProjects.push(study);
-allProjects.push(study);
-allProjects.push(study);
-allProjects.push(study);
-allProjects.push(study);
-allProjects.push(study);
 allProjects.push(study);
 
 let gymTaskOne = createTask(
@@ -49,4 +44,8 @@ gym.tasks.push(gymTaskThree);
 
 loadHomePage();
 
-export { allProjects };
+function addToProjects(project){
+  allProjects.push(project);
+}
+
+export { allProjects, addToProjects };

@@ -6,6 +6,9 @@ import minusImage from "./icons/minus.svg";
 import plusImage from "./icons/plus-box-outline.svg";
 import { allProjects } from "./index.js";
 
+import { createNewProjectModal } from "./project.js";
+import { content } from "./loadContent.js";
+
 let sidebar;
 let homeCard;
 let homeCardTitle;
@@ -48,6 +51,7 @@ let homeCategories = [
 ];
 
 function loadHomeCard() {
+  homeCard = null;
   homeCard = document.createElement("div");
   homeCard.id = "home-card";
 
@@ -75,6 +79,7 @@ function loadHomeCard() {
 }
 
 function loadProjectCard() {
+  projectCard = null;
   projectCard = document.createElement("div");
   projectCard.id = "project-card";
 
@@ -106,16 +111,18 @@ function loadProjectCard() {
     projectCard.appendChild(project);
   }
 
-  let addNewProject= document.createElement("div");
-  let addNewProjectIcon = document.createElement("div");
-  addNewProject.appendChild(addNewProjectIcon);
-  addNewProjectIcon.appendChild(plusIcon);
+  let addNewProject = document.createElement("div");
+  addNewProjectBtn = document.createElement("div");
+  addNewProject.appendChild(addNewProjectBtn);
+  addNewProjectBtn.appendChild(plusIcon);
+
+  addNewProjectBtn.addEventListener("click", loadProjectModal);
 
   projectCard.appendChild(addNewProject);
-
 }
 
 function loadSidebar() {
+  sidebar = null;
   sidebar = document.createElement("div");
   sidebar.id = "div-sidebar";
 
@@ -126,4 +133,18 @@ function loadSidebar() {
   sidebar.appendChild(projectCard);
 }
 
-export { sidebar, loadSidebar };
+function loadProjectModal(){
+  console.log("addNewProject clicked");
+
+  let modal = createNewProjectModal();
+  modal.style.display = "block";
+  content.append(modal);
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
+
+export { sidebar, loadSidebar, loadProjectCard };

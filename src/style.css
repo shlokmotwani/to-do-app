@@ -22,6 +22,7 @@ div {
 /* any change here should also be made in loadHeader.js */
 #div-home-page {
   min-height: 800px;
+  min-height: 800px;
   display: grid;
   grid-template-columns: 200px 1fr;
   grid-template-rows: 7fr 90fr 3fr;

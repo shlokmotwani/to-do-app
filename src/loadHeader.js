@@ -43,6 +43,7 @@ function loadHeader() {
       "hdr hdr"
       "cnt cnt"
       "ftr ftr";`;
+
     } else {
       isSidebarVisible = true;
       sidebar.style.cssText = `
