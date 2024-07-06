@@ -1,21 +1,26 @@
 let content;
 let innerDiv;
 let titleText;
-let addTaskBtn;
+let addNewTaskBtn;
 let tasksDiv;
 let tasksToLoad = [];
 
 import plusImage from "./icons/plus-box-outline.svg";
 
 import { allProjects } from "./index";
+import { createNewTaskModal } from "./task";
 
 function loadContent() {
   content = null;
-  addTaskBtn = document.createElement("div");
-  addTaskBtn.id = "add-task-button";
+  addNewTaskBtn = document.createElement("div");
+  addNewTaskBtn.id = "add-task-button";
   let plusIcon = new Image();
   plusIcon.src = plusImage;
-  addTaskBtn.appendChild(plusIcon);
+  addNewTaskBtn.appendChild(plusIcon);
+
+  addNewTaskBtn.addEventListener("click", ()=>{
+    loadTaskModal();
+  });
 
   content = document.createElement("div");
   content.id = "div-content";
@@ -36,11 +41,10 @@ function loadContent() {
   titleDiv.appendChild(titleText);
   innerDiv.appendChild(titleDiv);
   innerDiv.appendChild(tasksDiv);
-  innerDiv.appendChild(addTaskBtn);
+  innerDiv.appendChild(addNewTaskBtn);
   content.appendChild(innerDiv);
 
   loadTaskCard();
-  // logAllTasks();
 }
 
 function setTasksToLoad(projectName) {
@@ -107,14 +111,18 @@ function loadTaskCard() {
   }
 }
 
-function logAllTasks() {
-  console.log("logAllTasks has been called");
-  for (let i = 0; i < allProjects.length; i++) {
-    console.log("Project Title : " + allProjects[i].name);
-    for (let j = 0; j < allProjects[i].tasks.length; j++) {
-      console.log(allProjects[i].tasks[j].title);
+function loadTaskModal() {
+  console.log("addNewTask clicked");
+
+  let modal = createNewTaskModal();
+  modal.style.display = "block";
+  content.append(modal);
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
     }
-  }
+  };
 }
 
 export { content, loadContent, titleText, setTasksToLoad, loadTaskCard };

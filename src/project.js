@@ -3,7 +3,7 @@ import { loadHomePage } from "./loadHomePage";
 
 let modal;
 
-export function createProject(name) {
+function createProject(name) {
   const tasks = [];
   return { name, tasks };
 }
@@ -47,4 +47,4 @@ function createNewProjectModal() {
   modal.appendChild(modalContent);
   return modal;
 }
-export { createNewProjectModal };
+export { createProject, createNewProjectModal };

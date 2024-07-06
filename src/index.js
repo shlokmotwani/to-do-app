@@ -76,7 +76,7 @@ loadHomePage();
 
 //Show all tasks by default
 homeCategoryButtons[0].click();
-lastBtnClicked = homeCategoryButtons[0];
+// lastBtnClicked = homeCategoryButtons[0];
 
 function addToProjects(project){
   allProjects.push(project);

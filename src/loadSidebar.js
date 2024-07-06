@@ -21,6 +21,7 @@ let projectCardTitle;
 let projectCardLine;
 let addNewProjectBtn;
 let homeCategoryButtons = [];
+let lastBtnClicked;
 
 let allTasksIcon = new Image();
 let todayIcon = new Image();
@@ -86,6 +87,7 @@ function loadHomeCard() {
       titleText.textContent = homeCategories[i].text;
       setTasksToLoad(homeCategories[i].text);
       loadTaskCard();
+      lastBtnClicked = homeCategories[i].text;
     });
 
     homeCard.appendChild(category);
@@ -125,6 +127,7 @@ function loadProjectCard() {
       titleText.textContent = projectText.textContent;
       setTasksToLoad(projectText.textContent);
       loadTaskCard();
+      lastBtnClicked = titleText.textContent;
     });
 
     projectCard.appendChild(project);
@@ -166,4 +169,4 @@ function loadProjectModal() {
   };
 }
 
-export { sidebar, loadSidebar, loadProjectCard, homeCategoryButtons };
+export { sidebar, loadSidebar, loadProjectCard, homeCategoryButtons, lastBtnClicked};

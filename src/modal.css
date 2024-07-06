@@ -62,3 +62,24 @@
 #modal-content button:last-child{
     background-color: var(--cancel-button-color);
 }
+
+.modal > #modal-content{
+    width: 800px;
+    height: fit-content;
+    padding: 50px;
+}
+
+.modal > #modal-content > #task-modal-input-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal > #modal-content > #task-modal-input-div > input{
+    margin: 20px 0;
+}
+
+#task-modal-button-div{
+    margin-top: 40px;
+}
