@@ -97,8 +97,8 @@ div {
   /* border: 1px solid black; */
 }
 
-#home-card>div:hover,
-#project-card>div:hover {
+#home-card > div:hover,
+#project-card > div:hover {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 7px;
   cursor: pointer;
@@ -123,14 +123,17 @@ div {
 }
 
 #home-card > div > div:first-child,
-#project-card > div > div:first-child{
-    width: 2.0rem;
-    height: 2.0rem;
+#project-card > div > div:first-child {
+  width: 2rem;
+  height: 2rem;
 }
 
-#project-card > div:last-child{
+#project-card > div:last-child {
   display: flex;
   justify-content: center;
+  border: 1px dashed rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 5px;
 }
 
 #div-content {
@@ -138,7 +141,7 @@ div {
   grid-area: cnt;
 }
 
-#div-innerDiv{
+#div-innerDiv {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -148,7 +151,7 @@ div {
   background-color: brown;
 }
 
-#content-title{
+#content-title {
   background-color: aqua;
   flex: 1;
   font-size: 2.7rem;
@@ -159,13 +162,34 @@ div {
   height: 50%;
 }
 
-#content-title > span{
+#content-title > span {
   margin-left: 50px;
 }
 
-#content-tasks{
-background-color: black;
-flex: 10;
+#content-tasks {
+  background-color: yellowgreen;
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: 70%;
+  min-width: 800px;
+}
+
+#content-tasks > div{
+  border: 2px solid black;
+  height: 100px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+#add-task-button {
+  position: fixed;
+  top: 90%;
+left: 95%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
 }
 
 #div-footer {
@@ -175,25 +199,25 @@ flex: 10;
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-#div-footer > div{
+#div-footer > div {
   display: flex;
   justify-content: center;
   padding-top: 5px;
   width: 400px;
 }
 
-#div-footer > div > div{
+#div-footer > div > div {
   width: fit-content;
   font-size: 1.3rem;
   color: antiquewhite;
 }
 
-#div-footer a{
+#div-footer a {
   color: antiquewhite;
 }
 
 /* heart logo */
-#div-footer > div > div:nth-child(2){
+#div-footer > div > div:nth-child(2) {
   width: 1.5rem;
   margin: 0 4px;
 }

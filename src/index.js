@@ -11,7 +11,7 @@ addToProjects(gym);
 let dance = createProject("Dance");
 addToProjects(dance);
 let study = createProject("Study");
-allProjects.push(study);
+addToProjects(study);
 
 let gymTaskOne = createTask(
   "Go to gym",
@@ -41,6 +41,35 @@ let gymTaskThree = createTask(
 gym.tasks.push(gymTaskOne);
 gym.tasks.push(gymTaskTwo);
 gym.tasks.push(gymTaskThree);
+
+let studyTaskOne = createTask(
+  "Go to library",
+  "check out all libraries",
+  "01/01/2025",
+  "high",
+  "leave your house on time",
+  true
+);
+
+let studyTaskTwo = createTask(
+  "Finalise library Plan",
+  "Get done with library incharge",
+  "01/01/2025",
+  "high",
+  "choose a library with good reviews"
+);
+
+let studyTaskThree = createTask(
+  "Start reading more",
+  "Follow abc routine",
+  "01/01/2025",
+  "low",
+  "Rest for 5 minutes after 25mins sesh"
+);
+
+study.tasks.push(studyTaskOne);
+study.tasks.push(studyTaskTwo);
+study.tasks.push(studyTaskThree);
 
 loadHomePage();
 
