@@ -1,5 +1,13 @@
 :root {
-  --sidebar-bg-color: rgba(255, 255, 255, 0);
+  --header-bg-color: #701a75;
+  --hide-sidebar-btn-bg-color :rgba(255, 255, 255, 0);
+  --sidebar-bg-color: #86198f;
+  --sidebar-btn-hover-bg-color: rgba(0, 0, 0, 0.1);
+  --content-bg-color: #a21caf50;
+  --title-bg-color: #3b0764be;
+  --title-font-color: wheat;
+  --card-item-hover: #d946ef80;
+  --footer-bg-color: rgba(0, 0, 0, 0.75);
 }
 
 * {
@@ -21,6 +29,7 @@ div {
 
 /* any change here should also be made in loadHeader.js */
 #div-home-page {
+  background-color: var(--content-bg-color);
   min-height: 800px;
   min-height: 800px;
   display: grid;
@@ -36,6 +45,7 @@ div {
   grid-area: hdr;
   display: flex;
   justify-content: space-between;
+  background-color: var(--header-bg-color);
 }
 
 #div-header-left {
@@ -65,10 +75,6 @@ div {
   font-weight: bold;
 }
 
-#logo-text-right {
-  color: green;
-}
-
 #div-header-right {
   width: 20%;
 }
@@ -76,7 +82,7 @@ div {
 #hide-sidebar-btn {
   background-image: url(./icons/hamburger-icon.svg);
   background-repeat: no-repeat;
-  background-color: var(--sidebar-bg-color);
+  background-color: var(--hide-sidebar-btn-bg-color);
   width: 40px;
   height: 40px;
   margin-left: 20px;
@@ -88,6 +94,7 @@ div {
   display: flex;
   flex-direction: column;
   height: fit-content;
+  /* background-color: var(--sidebar-bg-color); */
 }
 
 #home-card,
@@ -99,9 +106,10 @@ div {
 
 #home-card > div:hover,
 #project-card > div:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--sidebar-btn-hover-bg-color);
   border-radius: 7px;
   cursor: pointer;
+  font-size: 1.2rem;
 }
 
 /* home card and project card titles */
@@ -116,10 +124,10 @@ div {
 #project-card > div {
   display: flex;
   height: fit-content;
-  margin-top: 30px;
+  margin-top: 15px;
   align-items: center;
   font-size: 1rem;
-  padding: 2px;
+  padding: 8px 2px;
 }
 
 #home-card > div > div:first-child,
@@ -136,8 +144,11 @@ div {
   padding: 5px;
 }
 
+#project-card > div:last-child:hover{
+  background-color: var(--card-item-hover);
+}
+
 #div-content {
-  background-color: green;
   grid-area: cnt;
 }
 
@@ -148,18 +159,19 @@ div {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: brown;
+  background-color: var(--content-bg-color);
 }
 
 #content-title {
-  background-color: aqua;
+  background-color: var(--title-bg-color);
+  color: var(--title-font-color);
   flex: 1;
   font-size: 2.7rem;
   display: flex;
   align-items: center;
   border-radius: 10px;
   width: 70%;
-  height: 50%;
+  margin-top: 10px;
 }
 
 #content-title > span {
@@ -167,7 +179,6 @@ div {
 }
 
 #content-tasks {
-  background-color: yellowgreen;
   flex: 10;
   display: flex;
   flex-direction: column;
@@ -181,7 +192,7 @@ div {
   border-radius: 15px;
   height: fit-content;
   padding: 20px;
-  margin: 10px 0;
+  margin: 20px 0;
   display: flex;
 }
 
@@ -203,7 +214,7 @@ left: 95%;
   grid-area: ftr;
   display: flex;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: var(--footer-bg-color);
 }
 
 #div-footer > div {
@@ -216,11 +227,11 @@ left: 95%;
 #div-footer > div > div {
   width: fit-content;
   font-size: 1.3rem;
-  color: antiquewhite;
+  color: var(--title-font-color);
 }
 
 #div-footer a {
-  color: antiquewhite;
+  color: var(--title-font-color);
 }
 
 /* heart logo */
