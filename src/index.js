@@ -4,6 +4,7 @@ import { loadHomePage } from "./loadHomePage";
 import { homeCategoryButtons, lastBtnClicked } from "./loadSidebar";
 import "./style.css";
 import "./modal.css";
+import { format } from "date-fns";
 
 let allProjects = [];
 
@@ -17,7 +18,7 @@ addToProjects(study);
 let gymTaskOne = createTask(
   "Go to gym",
   "check out all gyms",
-  "01/01/2025",
+  format(new Date('December 25, 2024'), "dd/LLL/yyyy"),
   "high",
   "leave your house on time",
   true
@@ -26,15 +27,15 @@ let gymTaskOne = createTask(
 let gymTaskTwo = createTask(
   "Finalise Gym Plan",
   "Get done with gym and trainers",
-  "01/01/2025",
-  "high",
+  format(new Date('July 07, 2024'), "dd/LLL/yyyy"),
+  "medium",
   "choose a trainer with certification"
 );
 
 let gymTaskThree = createTask(
   "Start working out",
   "Follow PPL routine",
-  "01/01/2025",
+  format(new Date('May 16, 2024'), "dd/LLL/yyyy"),
   "low",
   "Rest for 1-2 minutes in b/w sets"
 );
@@ -43,10 +44,39 @@ gym.tasks.push(gymTaskOne);
 gym.tasks.push(gymTaskTwo);
 gym.tasks.push(gymTaskThree);
 
+let danceTaskOne = createTask(
+  "Go to Dance class",
+  "check out all dance trainers",
+  format(new Date('December 06, 2024'), "dd/LLL/yyyy"),
+  "medium",
+  "leave your house on time",
+  true
+);
+
+let danceTaskTwo = createTask(
+  "Learn classical dance",
+  "Get done with the basics",
+  format(new Date('September 18, 2024'), "dd/LLL/yyyy"),
+  "high",
+  "nothing here"
+);
+
+let danceTaskThree = createTask(
+  "Start practicing more",
+  "Follow abc routine",
+  format(new Date('July 11, 2024'), "dd/LLL/yyyy"),
+  "low",
+  "Rest for 5 minutes after 25mins sesh"
+);
+
+dance.tasks.push(danceTaskOne);
+dance.tasks.push(danceTaskTwo);
+dance.tasks.push(danceTaskThree);
+
 let studyTaskOne = createTask(
   "Go to library",
   "check out all libraries",
-  "01/01/2025",
+  format(new Date('October 16, 2024'), "dd/LLL/yyyy"),
   "high",
   "leave your house on time",
   true
@@ -55,7 +85,7 @@ let studyTaskOne = createTask(
 let studyTaskTwo = createTask(
   "Finalise library Plan",
   "Get done with library incharge",
-  "01/01/2025",
+  format(new Date('July 07, 2024'), "dd/LLL/yyyy"),
   "high",
   "choose a library with good reviews"
 );
@@ -63,7 +93,7 @@ let studyTaskTwo = createTask(
 let studyTaskThree = createTask(
   "Start reading more",
   "Follow abc routine",
-  "01/01/2025",
+  format(new Date('January 04, 2025'), "dd/LLL/yyyy"),
   "low",
   "Rest for 5 minutes after 25mins sesh"
 );

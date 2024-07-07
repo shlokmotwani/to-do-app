@@ -3,7 +3,7 @@
   --hide-sidebar-btn-bg-color :rgba(255, 255, 255, 0);
   --sidebar-bg-color: #86198f;
   --sidebar-btn-hover-bg-color: rgba(0, 0, 0, 0.1);
-  --content-bg-color: #a21caf50;
+  --content-bg-color: #a21caf69;
   --title-bg-color: #3b0764be;
   --title-font-color: wheat;
   --card-item-hover: #d946ef80;
@@ -29,7 +29,7 @@ div {
 
 /* any change here should also be made in loadHeader.js */
 #div-home-page {
-  background-color: var(--content-bg-color);
+  /* background-color: var(--content-bg-color); */
   min-height: 800px;
   min-height: 800px;
   display: grid;
@@ -199,6 +199,8 @@ div {
 #content-tasks > div > div{
   border: 1px solid black;
   text-align: center;
+  font-size: 1.1rem;
+  border-radius: 10px;
 }
 
 #add-task-button {

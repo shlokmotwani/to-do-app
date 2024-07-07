@@ -66,6 +66,7 @@ function loadHeader() {
   logoTextLeft = document.createElement("span");
   logoTextLeft.id = "logo-text-left";
   logoTextLeft.textContent = "To";
+  logoTextLeft.style.color = "wheat";
   logoTextRight = document.createElement("span");
   logoTextRight.id = "logo-text-right";
   logoTextRight.textContent = "Do";

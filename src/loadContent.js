@@ -4,11 +4,14 @@ let titleText;
 let addNewTaskBtn;
 let tasksDiv;
 let tasksToLoad = [];
-
+import { format, differenceInDays } from "date-fns";
 import plusImage from "./icons/plus-box-outline.svg";
-
 import { allProjects } from "./index";
 import { createNewTaskModal } from "./task";
+
+let lowPriorityColor = "rgba(50,205,50, 0.8)";
+let mediumPriorityColor = "rgba(252, 173, 3, 0.8)";
+let highPriorityColor = "rgba(252, 44, 3, 0.7)";
 
 function loadContent() {
   content = null;
@@ -56,7 +59,41 @@ function setTasksToLoad(projectName) {
         tasksToLoad.push(allProjects[i].tasks[j]);
       }
     }
-  } else {
+  }
+  else if (projectName == "Today") {
+    let date = new Date();
+    date = format(date, "dd/LLL/yyyy");
+    for (let i = 0; i < allProjects.length; i++) {
+      for (let j = 0; j < allProjects[i].tasks.length; j++) {
+        if(allProjects[i].tasks[j].dueDate == date){
+          tasksToLoad.push(allProjects[i].tasks[j]);
+        }
+      }
+    }
+  }
+  else if (projectName == "Next 7 days") {
+    let date = new Date();
+    date = format(date, "dd/LLL/yyyy");
+    for (let i = 0; i < allProjects.length; i++) {
+      for (let j = 0; j < allProjects[i].tasks.length; j++) {
+        let diffInDays = differenceInDays(allProjects[i].tasks[j].dueDate, date);
+        console.log(diffInDays);
+        if(0 <= diffInDays && diffInDays <= 6){
+          tasksToLoad.push(allProjects[i].tasks[j]);
+        }
+      }
+    }
+  }
+  else if (projectName == "Important") {
+    for (let i = 0; i < allProjects.length; i++) {
+      for (let j = 0; j < allProjects[i].tasks.length; j++) {
+        if(allProjects[i].tasks[j].priority == "high"){
+          tasksToLoad.push(allProjects[i].tasks[j]);
+        }
+      }
+    }
+  }
+   else {
     for (let i = 0; i < allProjects.length; i++) {
       if (allProjects[i].name == projectName) {
         tasksToLoad.push(...allProjects[i].tasks);
@@ -93,6 +130,18 @@ function loadTaskCard() {
     notesText.textContent = tasksToLoad[i].notes;
     isCompletedText.textContent = tasksToLoad[i].isCompleted;
 
+    switch(priority.textContent){
+      case "low":
+        taskCard.style.backgroundColor = lowPriorityColor;
+        break;
+        case "medium":
+        taskCard.style.backgroundColor = mediumPriorityColor;
+        break;
+        case "high":
+        taskCard.style.backgroundColor = highPriorityColor;
+        break;
+    }
+    
     title.appendChild(titleText);
     desc.appendChild(descText);
     dueDate.appendChild(dueDateText);
@@ -125,4 +174,4 @@ function loadTaskModal() {
   };
 }
 
-export { content, loadContent, titleText, setTasksToLoad, loadTaskCard };
+export { content, loadContent, titleText, setTasksToLoad, loadTaskCard, tasksToLoad };

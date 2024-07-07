@@ -3,6 +3,7 @@ import { setTasksToLoad, titleText } from "./loadContent";
 import { loadHomePage } from "./loadHomePage";
 import { loadContent } from "./loadContent";
 import { lastBtnClicked } from "./loadSidebar";
+import { format } from "date-fns";
 
 let modal;
 let dropDownInner;
@@ -53,7 +54,7 @@ function createNewTaskModal() {
   projectCategory.placeholder = "Project Category";
 
   let dueDate = document.createElement(`input`);
-  dueDate.type = "text";
+  dueDate.type = "date";
   dueDate.placeholder = "dueDate";
 
   let priority = document.createElement(`input`);
@@ -74,9 +75,11 @@ function createNewTaskModal() {
 
   addBtn.addEventListener("click", () => {
     if (taskName.value) {
+      let date = dueDate.value;
+      date = format(date, "dd/LLL/yyyy");
       let task = createTask(taskName.value,
         desc.value,
-        dueDate.value,
+        date,
         priority.value,
         notes.value,
         isCompleted.value
