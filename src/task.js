@@ -5,6 +5,7 @@ import { loadContent } from "./loadContent";
 import { lastBtnClicked } from "./loadSidebar";
 
 let modal;
+let dropDownInner;
 
 function createTask(
   title = "Blank",
@@ -44,8 +45,11 @@ function createNewTaskModal() {
   desc.type = "text";
   desc.placeholder = "Description";
 
-  let projectCategory = document.createElement(`input`);
-  projectCategory.type = "text";
+  // let projectCategory = document.createElement(`input`);
+  // projectCategory.type = "text";
+  // projectCategory.placeholder = "Project Category";
+
+  let projectCategory = projectDropDownMenu();
   projectCategory.placeholder = "Project Category";
 
   let dueDate = document.createElement(`input`);
@@ -78,8 +82,9 @@ function createNewTaskModal() {
         isCompleted.value
 
       );
+      console.log("DDI = " + dropDownInner.value);
       allProjects.forEach(element => {
-        if(element.name == lastBtnClicked){
+        if(element.name == dropDownInner.value){
           element.tasks.push(task);
         }
       });
@@ -114,4 +119,23 @@ function createNewTaskModal() {
   modal.appendChild(modalContent);
   return modal;
 }
+
+function projectDropDownMenu(){
+  let dropDown = document.createElement('div');
+  dropDown.classList.add('container');
+  dropDownInner = document.createElement('select');
+
+  for(let i=0; i<allProjects.length; i++){
+    let option = document.createElement('option');
+    option.value = allProjects[i].name;
+    option.textContent = allProjects[i].name;
+
+    dropDownInner.appendChild(option);
+  }
+
+  dropDown.appendChild(dropDownInner);
+  return dropDown;
+}
+
+
 export { createTask, createNewTaskModal };

@@ -80,6 +80,25 @@
     margin: 20px 0;
 }
 
+#new-task-modal > #modal-content > #task-modal-input-div > .container > #drop-down-button{
+    background-color: antiquewhite;
+    margin: 20px 0;
+    width: fit-content;
+}
+
+#new-task-modal > #modal-content > #task-modal-input-div > .container{
+    display: flex;
+    margin-left: 180px;
+}
+
+#new-task-modal > #modal-content > #task-modal-input-div > .container > select{
+    background-color: antiquewhite;
+    margin: 20px 0;
+    width: 25%;
+    font-size: 1.0rem;
+    padding: 8px 15px;
+}
+
 #task-modal-button-div{
     margin-top: 40px;
 }
