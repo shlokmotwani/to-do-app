@@ -10,7 +10,7 @@ import { createNewProjectModal } from "./project.js";
 import { content } from "./loadContent.js";
 import { titleText } from "./loadContent.js";
 import { setTasksToLoad } from "./loadContent.js";
-import { loadTaskCard } from "./loadContent.js";
+import { loadTaskCards } from "./loadContent.js";
 
 let sidebar;
 let homeCard;
@@ -84,7 +84,7 @@ function loadHomeCard() {
     category.addEventListener("click", () => {
       titleText.textContent = homeCategories[i].text;
       setTasksToLoad(homeCategories[i].text);
-      loadTaskCard();
+      loadTaskCards();
       lastBtnClicked = homeCategories[i].text;
     });
 
@@ -123,7 +123,7 @@ function loadProjectCard() {
     project.addEventListener("click", () => {
       titleText.textContent = projectText.textContent;
       setTasksToLoad(projectText.textContent);
-      loadTaskCard();
+      loadTaskCards();
       lastBtnClicked = titleText.textContent;
     });
 

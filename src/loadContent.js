@@ -1,7 +1,10 @@
 import { format, differenceInDays } from "date-fns";
 import { allProjects } from "./index";
 import { createNewTaskModal } from "./task";
+import { lastBtnClicked } from "./loadSidebar";
 import plusImage from "./icons/plus-box-outline.svg";
+import editImage from "./icons/file-edit.svg";
+import deleteImage from "./icons/delete.svg";
 
 let content;
 let innerDiv;
@@ -49,7 +52,7 @@ function loadContent() {
   innerDiv.appendChild(addNewTaskBtn);
   content.appendChild(innerDiv);
 
-  loadTaskCard();
+  loadTaskCards();
 }
 
 function setTasksToLoad(projectName) {
@@ -124,7 +127,7 @@ function loadProjectTasks(projectName) {
   }
 }
 
-function loadTaskCard() {
+function loadTaskCards() {
   tasksDiv.innerHTML = "";
 
   for (let i = 0; i < tasksToLoad.length; i++) {
@@ -135,6 +138,9 @@ function loadTaskCard() {
     let priority = document.createElement("div");
     let notes = document.createElement("div");
     let isCompleted = document.createElement("div");
+    let operations = document.createElement("div");
+    let deleteBtn = document.createElement("div");
+    let editBtn = document.createElement("div");
 
     let titleText = document.createElement("span");
     let descText = document.createElement("span");
@@ -150,6 +156,8 @@ function loadTaskCard() {
     notesText.textContent = tasksToLoad[i].notes;
     isCompletedText.textContent = tasksToLoad[i].isCompleted;
 
+    operations.id = "operations-div";
+
     title.appendChild(titleText);
     desc.appendChild(descText);
     dueDate.appendChild(dueDateText);
@@ -157,12 +165,32 @@ function loadTaskCard() {
     notes.appendChild(notesText);
     isCompleted.appendChild(isCompletedText);
 
+    let editIcon = new Image();
+    editIcon.src = editImage;
+    editBtn.appendChild(editIcon);
+    editBtn.addEventListener("click", (event) => {
+      editTask(event);
+    });
+
+    let deleteIcon = new Image();
+    deleteIcon.src = deleteImage;
+    deleteBtn.appendChild(deleteIcon);
+    deleteBtn.addEventListener("click", (event) => {
+      deleteTask(event);
+      setTasksToLoad(lastBtnClicked);
+      loadTaskCards();
+    });
+
+    operations.appendChild(editBtn);
+    operations.appendChild(deleteBtn);
+
     taskCard.appendChild(title);
     taskCard.appendChild(desc);
     taskCard.appendChild(dueDate);
     taskCard.appendChild(priority);
     taskCard.appendChild(notes);
     taskCard.appendChild(isCompleted);
+    taskCard.appendChild(operations);
 
     //set tasks color based on their priority
     switch (priority.textContent) {
@@ -178,6 +206,20 @@ function loadTaskCard() {
     }
 
     tasksDiv.appendChild(taskCard);
+  }
+}
+
+function editTask(event) {}
+
+function deleteTask(event) {
+  let taskTitle =
+    event.target.parentNode.parentNode.parentNode.firstChild.textContent;
+  for (let i = 0; i < allProjects.length; i++) {
+    for (let j = 0; j < allProjects[i].tasks.length; j++) {
+      if (allProjects[i].tasks[j].title == taskTitle) {
+        allProjects[i].tasks.splice(j, 1);
+      }
+    }
   }
 }
 
@@ -198,6 +240,6 @@ export {
   loadContent,
   titleText,
   setTasksToLoad,
-  loadTaskCard,
+  loadTaskCards,
   tasksToLoad,
 };

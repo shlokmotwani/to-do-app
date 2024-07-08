@@ -81,7 +81,7 @@ function createNewTaskModal() {
         notes.value,
         isCompleted.value
       );
-      console.log("dropDownInner = " + dropDownInner.value);
+    
       allProjects.forEach((element) => {
         if (element.name == dropDownInner.value) {
           element.tasks.push(task);
@@ -91,7 +91,6 @@ function createNewTaskModal() {
       document.body.innerHTML = "";
       loadHomePage();
       titleText.textContent = lastBtnClicked;
-      console.log(lastBtnClicked);
     }
     modal.style.display = "none";
   });
