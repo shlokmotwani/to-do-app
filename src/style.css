@@ -152,7 +152,7 @@ div {
   grid-area: cnt;
 }
 
-#div-innerDiv {
+#div-inner-div {
   display: flex;
   flex-direction: column;
   justify-content: center;

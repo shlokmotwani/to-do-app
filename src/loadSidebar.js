@@ -4,8 +4,8 @@ import next7daysImage from "./icons/content-duplicate.svg";
 import importantImage from "./icons/star.svg";
 import minusImage from "./icons/minus.svg";
 import plusImage from "./icons/plus-box-outline.svg";
-import { allProjects } from "./index.js";
 
+import { allProjects } from "./index.js";
 import { createNewProjectModal } from "./project.js";
 import { content } from "./loadContent.js";
 import { titleText } from "./loadContent.js";
@@ -58,28 +58,26 @@ let homeCategories = [
 function loadHomeCard() {
   homeCard = null;
   homeCard = document.createElement("div");
-  homeCard.id = "home-card";
-
   homeCardTitle = document.createElement("p");
-  homeCardTitle.textContent = "Home";
   homeCardLine = document.createElement("hr");
+
+  homeCard.id = "home-card";
+  homeCardTitle.textContent = "Home";
 
   homeCard.appendChild(homeCardTitle);
   homeCard.appendChild(homeCardLine);
 
   for (let i = 0; i < homeCategories.length; i++) {
     let category = document.createElement("div");
-    category.classList.add("home-categories");
     let categoryIcon = document.createElement("div");
-    categoryIcon.appendChild(homeCategories[i].icon);
-
     let categoryText = document.createElement("p");
+
+    category.classList.add("home-categories");
+    categoryIcon.appendChild(homeCategories[i].icon);
     categoryText.textContent = homeCategories[i].text;
 
     category.appendChild(categoryIcon);
     category.appendChild(categoryText);
-
-    // console.log(category);
 
     homeCategoryButtons.push(category);
 
@@ -97,27 +95,26 @@ function loadHomeCard() {
 function loadProjectCard() {
   projectCard = null;
   projectCard = document.createElement("div");
-  projectCard.id = "project-card";
-
   projectCardTitle = document.createElement("p");
-  projectCardTitle.textContent = "Projects";
   projectCardLine = document.createElement("hr");
+
+  projectCard.id = "project-card";
+  projectCardTitle.textContent = "Projects";
 
   projectCard.appendChild(projectCardTitle);
   projectCard.appendChild(projectCardLine);
 
   for (let i = 0; i < allProjects.length; i++) {
     let project = document.createElement("div");
-    project.classList.add("project-categories");
     let projectIcon = document.createElement("div");
+    let projectText = document.createElement("p");
+    project.classList.add("project-categories");
 
     // minusIcon has to be re-created in the loop
     // to append multiple unique elements to the project div
     minusIcon = new Image();
     minusIcon.src = minusImage;
     projectIcon.appendChild(minusIcon);
-
-    let projectText = document.createElement("p");
     projectText.textContent = allProjects[i].name;
 
     project.appendChild(projectIcon);
@@ -156,8 +153,6 @@ function loadSidebar() {
 }
 
 function loadProjectModal() {
-  console.log("addNewProject clicked");
-
   let modal = createNewProjectModal();
   modal.style.display = "block";
   content.append(modal);
@@ -169,4 +164,10 @@ function loadProjectModal() {
   };
 }
 
-export { sidebar, loadSidebar, loadProjectCard, homeCategoryButtons, lastBtnClicked};
+export {
+  sidebar,
+  loadSidebar,
+  loadProjectCard,
+  homeCategoryButtons,
+  lastBtnClicked,
+};

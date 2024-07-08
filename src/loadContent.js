@@ -1,45 +1,47 @@
+import { format, differenceInDays } from "date-fns";
+import { allProjects } from "./index";
+import { createNewTaskModal } from "./task";
+import plusImage from "./icons/plus-box-outline.svg";
+
 let content;
 let innerDiv;
 let titleText;
 let addNewTaskBtn;
 let tasksDiv;
 let tasksToLoad = [];
-import { format, differenceInDays } from "date-fns";
-import plusImage from "./icons/plus-box-outline.svg";
-import { allProjects } from "./index";
-import { createNewTaskModal } from "./task";
-
-let lowPriorityColor = "rgba(50,205,50, 0.8)";
-let mediumPriorityColor = "rgba(252, 173, 3, 0.8)";
-let highPriorityColor = "rgba(252, 44, 3, 0.7)";
+let LOW_PRIORITY_COLOR = "rgba(50,205,50, 0.8)";
+let MED_PRIORITY_COLOR = "rgba(252, 173, 3, 0.8)";
+let HIGH_PRIORITY_COLOR = "rgba(252, 44, 3, 0.7)";
 
 function loadContent() {
+  let plusIcon;
+  let titleDiv;
+
   content = null;
   addNewTaskBtn = document.createElement("div");
+  plusIcon = new Image();
+  content = document.createElement("div");
+  innerDiv = document.createElement("div");
+  titleDiv = document.createElement("div");
+  titleText = document.createElement("span");
+  tasksDiv = document.createElement("div");
+
   addNewTaskBtn.id = "add-task-button";
-  let plusIcon = new Image();
+  content.id = "div-content";
+  innerDiv.id = "div-inner-div";
+  titleDiv.id = "content-title";
+  titleText.id = "content-title-text";
+  tasksDiv.id = "content-tasks";
   plusIcon.src = plusImage;
   addNewTaskBtn.appendChild(plusIcon);
 
-  addNewTaskBtn.addEventListener("click", ()=>{
+  addNewTaskBtn.addEventListener("click", () => {
     loadTaskModal();
   });
-
-  content = document.createElement("div");
-  content.id = "div-content";
-  innerDiv = document.createElement("div");
-  innerDiv.id = "div-innerDiv";
-
-  let titleDiv = document.createElement("div");
-  titleDiv.id = "content-title";
-  titleText = document.createElement("span");
-  titleText.id = "content-title-text";
 
   if (titleText.textContent == "") {
     titleText.textContent = "Title";
   }
-  tasksDiv = document.createElement("div");
-  tasksDiv.id = "content-tasks";
 
   titleDiv.appendChild(titleText);
   innerDiv.appendChild(titleDiv);
@@ -52,59 +54,77 @@ function loadContent() {
 
 function setTasksToLoad(projectName) {
   tasksToLoad = [];
-  console.log("setTasksToLoad function called");
-  if (projectName == "All Tasks") {
-    for (let i = 0; i < allProjects.length; i++) {
-      for (let j = 0; j < allProjects[i].tasks.length; j++) {
+
+  switch (projectName) {
+    case "All Tasks":
+      loadAllTasks();
+      break;
+    case "Today":
+      loadTasksForToday();
+      break;
+    case "Next 7 days":
+      loadTasksForTheWeek();
+      break;
+    case "Important":
+      loadImportantTasks();
+      break;
+    default:
+      loadProjectTasks(projectName);
+  }
+}
+
+function loadAllTasks() {
+  for (let i = 0; i < allProjects.length; i++) {
+    for (let j = 0; j < allProjects[i].tasks.length; j++) {
+      tasksToLoad.push(allProjects[i].tasks[j]);
+    }
+  }
+}
+
+function loadTasksForToday() {
+  let date = new Date();
+  date = format(date, "dd/LLL/yyyy");
+  for (let i = 0; i < allProjects.length; i++) {
+    for (let j = 0; j < allProjects[i].tasks.length; j++) {
+      if (allProjects[i].tasks[j].dueDate == date) {
         tasksToLoad.push(allProjects[i].tasks[j]);
       }
     }
   }
-  else if (projectName == "Today") {
-    let date = new Date();
-    date = format(date, "dd/LLL/yyyy");
-    for (let i = 0; i < allProjects.length; i++) {
-      for (let j = 0; j < allProjects[i].tasks.length; j++) {
-        if(allProjects[i].tasks[j].dueDate == date){
-          tasksToLoad.push(allProjects[i].tasks[j]);
-        }
+}
+
+function loadTasksForTheWeek() {
+  let date = new Date();
+  date = format(date, "dd/LLL/yyyy");
+  for (let i = 0; i < allProjects.length; i++) {
+    for (let j = 0; j < allProjects[i].tasks.length; j++) {
+      let diffInDays = differenceInDays(allProjects[i].tasks[j].dueDate, date);
+      if (0 <= diffInDays && diffInDays <= 6) {
+        tasksToLoad.push(allProjects[i].tasks[j]);
       }
     }
   }
-  else if (projectName == "Next 7 days") {
-    let date = new Date();
-    date = format(date, "dd/LLL/yyyy");
-    for (let i = 0; i < allProjects.length; i++) {
-      for (let j = 0; j < allProjects[i].tasks.length; j++) {
-        let diffInDays = differenceInDays(allProjects[i].tasks[j].dueDate, date);
-        console.log(diffInDays);
-        if(0 <= diffInDays && diffInDays <= 6){
-          tasksToLoad.push(allProjects[i].tasks[j]);
-        }
+}
+
+function loadImportantTasks() {
+  for (let i = 0; i < allProjects.length; i++) {
+    for (let j = 0; j < allProjects[i].tasks.length; j++) {
+      if (allProjects[i].tasks[j].priority == "high") {
+        tasksToLoad.push(allProjects[i].tasks[j]);
       }
     }
   }
-  else if (projectName == "Important") {
-    for (let i = 0; i < allProjects.length; i++) {
-      for (let j = 0; j < allProjects[i].tasks.length; j++) {
-        if(allProjects[i].tasks[j].priority == "high"){
-          tasksToLoad.push(allProjects[i].tasks[j]);
-        }
-      }
+}
+
+function loadProjectTasks(projectName) {
+  for (let i = 0; i < allProjects.length; i++) {
+    if (allProjects[i].name == projectName) {
+      tasksToLoad.push(...allProjects[i].tasks);
     }
   }
-   else {
-    for (let i = 0; i < allProjects.length; i++) {
-      if (allProjects[i].name == projectName) {
-        tasksToLoad.push(...allProjects[i].tasks);
-      }
-    }
-  }
-  console.log(tasksToLoad);
 }
 
 function loadTaskCard() {
-  console.log("loadTaskCard has been called");
   tasksDiv.innerHTML = "";
 
   for (let i = 0; i < tasksToLoad.length; i++) {
@@ -130,18 +150,6 @@ function loadTaskCard() {
     notesText.textContent = tasksToLoad[i].notes;
     isCompletedText.textContent = tasksToLoad[i].isCompleted;
 
-    switch(priority.textContent){
-      case "low":
-        taskCard.style.backgroundColor = lowPriorityColor;
-        break;
-        case "medium":
-        taskCard.style.backgroundColor = mediumPriorityColor;
-        break;
-        case "high":
-        taskCard.style.backgroundColor = highPriorityColor;
-        break;
-    }
-    
     title.appendChild(titleText);
     desc.appendChild(descText);
     dueDate.appendChild(dueDateText);
@@ -156,13 +164,24 @@ function loadTaskCard() {
     taskCard.appendChild(notes);
     taskCard.appendChild(isCompleted);
 
+    //set tasks color based on their priority
+    switch (priority.textContent) {
+      case "low":
+        taskCard.style.backgroundColor = LOW_PRIORITY_COLOR;
+        break;
+      case "medium":
+        taskCard.style.backgroundColor = MED_PRIORITY_COLOR;
+        break;
+      case "high":
+        taskCard.style.backgroundColor = HIGH_PRIORITY_COLOR;
+        break;
+    }
+
     tasksDiv.appendChild(taskCard);
   }
 }
 
 function loadTaskModal() {
-  console.log("addNewTask clicked");
-
   let modal = createNewTaskModal();
   modal.style.display = "block";
   content.append(modal);
@@ -174,4 +193,11 @@ function loadTaskModal() {
   };
 }
 
-export { content, loadContent, titleText, setTasksToLoad, loadTaskCard, tasksToLoad };
+export {
+  content,
+  loadContent,
+  titleText,
+  setTasksToLoad,
+  loadTaskCard,
+  tasksToLoad,
+};

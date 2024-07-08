@@ -10,17 +10,21 @@ function createProject(name) {
 
 function createNewProjectModal() {
   modal = document.createElement("div");
-  modal.id = "newProjectModal";
-  modal.classList.add("modal");
   let modalContent = document.createElement("div");
-  modalContent.id = "modal-content";
   let inputDiv = document.createElement("div");
   let btnDiv = document.createElement("div");
   let projectName = document.createElement(`input`);
+  let addBtn = document.createElement("button");
+  let cancelBtn = document.createElement("button");
+
+  modal.classList.add("modal");
+  modal.id = "newProjectModal";
+  modalContent.id = "modal-content";
+
   projectName.type = "text";
   projectName.placeholder = "Project Name";
-  let addBtn = document.createElement("button");
   addBtn.textContent = "Add";
+  cancelBtn.textContent = "Cancel";
 
   addBtn.addEventListener("click", () => {
     if (projectName.value) {
@@ -32,8 +36,6 @@ function createNewProjectModal() {
     modal.style.display = "none";
   });
 
-  let cancelBtn = document.createElement("button");
-  cancelBtn.textContent = "Cancel";
   cancelBtn.addEventListener("click", () => {
     modal.style.display = "none";
   });
@@ -41,10 +43,10 @@ function createNewProjectModal() {
   inputDiv.appendChild(projectName);
   btnDiv.appendChild(addBtn);
   btnDiv.appendChild(cancelBtn);
-
   modalContent.appendChild(inputDiv);
   modalContent.appendChild(btnDiv);
   modal.appendChild(modalContent);
+
   return modal;
 }
 export { createProject, createNewProjectModal };

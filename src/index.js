@@ -1,115 +1,118 @@
 import { createProject } from "./project";
 import { createTask } from "./task";
 import { loadHomePage } from "./loadHomePage";
-import { homeCategoryButtons, lastBtnClicked } from "./loadSidebar";
+import { homeCategoryButtons } from "./loadSidebar";
 import "./style.css";
 import "./modal.css";
 import { format } from "date-fns";
 
 let allProjects = [];
 
-let gym = createProject("Gym");
-addToProjects(gym);
-let dance = createProject("Dance");
-addToProjects(dance);
-let study = createProject("Study");
-addToProjects(study);
+function addDummyContent() {
+  let gym = createProject("Gym");
+  let dance = createProject("Dance");
+  let study = createProject("Study");
+  addToProjects(gym);
+  addToProjects(dance);
+  addToProjects(study);
 
-let gymTaskOne = createTask(
-  "Go to gym",
-  "check out all gyms",
-  format(new Date('December 25, 2024'), "dd/LLL/yyyy"),
-  "high",
-  "leave your house on time",
-  true
-);
+  let gymTaskOne = createTask(
+    "Go to gym",
+    "check out all gyms",
+    format(new Date("December 25, 2024"), "dd/LLL/yyyy"),
+    "high",
+    "leave your house on time",
+    true
+  );
 
-let gymTaskTwo = createTask(
-  "Finalise Gym Plan",
-  "Get done with gym and trainers",
-  format(new Date('July 07, 2024'), "dd/LLL/yyyy"),
-  "medium",
-  "choose a trainer with certification"
-);
+  let gymTaskTwo = createTask(
+    "Finalise Gym Plan",
+    "Get done with gym and trainers",
+    format(new Date("July 07, 2024"), "dd/LLL/yyyy"),
+    "medium",
+    "choose a trainer with certification"
+  );
 
-let gymTaskThree = createTask(
-  "Start working out",
-  "Follow PPL routine",
-  format(new Date('May 16, 2024'), "dd/LLL/yyyy"),
-  "low",
-  "Rest for 1-2 minutes in b/w sets"
-);
+  let gymTaskThree = createTask(
+    "Start working out",
+    "Follow PPL routine",
+    format(new Date("May 16, 2024"), "dd/LLL/yyyy"),
+    "low",
+    "Rest for 1-2 minutes in b/w sets"
+  );
 
-gym.tasks.push(gymTaskOne);
-gym.tasks.push(gymTaskTwo);
-gym.tasks.push(gymTaskThree);
+  let danceTaskOne = createTask(
+    "Go to Dance class",
+    "check out all dance trainers",
+    format(new Date("December 06, 2024"), "dd/LLL/yyyy"),
+    "medium",
+    "leave your house on time",
+    true
+  );
 
-let danceTaskOne = createTask(
-  "Go to Dance class",
-  "check out all dance trainers",
-  format(new Date('December 06, 2024'), "dd/LLL/yyyy"),
-  "medium",
-  "leave your house on time",
-  true
-);
+  let danceTaskTwo = createTask(
+    "Learn classical dance",
+    "Get done with the basics",
+    format(new Date("September 18, 2024"), "dd/LLL/yyyy"),
+    "high",
+    "nothing here"
+  );
 
-let danceTaskTwo = createTask(
-  "Learn classical dance",
-  "Get done with the basics",
-  format(new Date('September 18, 2024'), "dd/LLL/yyyy"),
-  "high",
-  "nothing here"
-);
+  let danceTaskThree = createTask(
+    "Start practicing more",
+    "Follow abc routine",
+    format(new Date("July 11, 2024"), "dd/LLL/yyyy"),
+    "low",
+    "Rest for 5 minutes after 25mins sesh"
+  );
 
-let danceTaskThree = createTask(
-  "Start practicing more",
-  "Follow abc routine",
-  format(new Date('July 11, 2024'), "dd/LLL/yyyy"),
-  "low",
-  "Rest for 5 minutes after 25mins sesh"
-);
+  let studyTaskOne = createTask(
+    "Go to library",
+    "check out all libraries",
+    format(new Date("October 16, 2024"), "dd/LLL/yyyy"),
+    "high",
+    "leave your house on time",
+    true
+  );
 
-dance.tasks.push(danceTaskOne);
-dance.tasks.push(danceTaskTwo);
-dance.tasks.push(danceTaskThree);
+  let studyTaskTwo = createTask(
+    "Finalise library Plan",
+    "Get done with library incharge",
+    format(new Date("July 07, 2024"), "dd/LLL/yyyy"),
+    "high",
+    "choose a library with good reviews"
+  );
 
-let studyTaskOne = createTask(
-  "Go to library",
-  "check out all libraries",
-  format(new Date('October 16, 2024'), "dd/LLL/yyyy"),
-  "high",
-  "leave your house on time",
-  true
-);
+  let studyTaskThree = createTask(
+    "Start reading more",
+    "Follow abc routine",
+    format(new Date("January 04, 2025"), "dd/LLL/yyyy"),
+    "low",
+    "Rest for 5 minutes after 25mins sesh"
+  );
 
-let studyTaskTwo = createTask(
-  "Finalise library Plan",
-  "Get done with library incharge",
-  format(new Date('July 07, 2024'), "dd/LLL/yyyy"),
-  "high",
-  "choose a library with good reviews"
-);
 
-let studyTaskThree = createTask(
-  "Start reading more",
-  "Follow abc routine",
-  format(new Date('January 04, 2025'), "dd/LLL/yyyy"),
-  "low",
-  "Rest for 5 minutes after 25mins sesh"
-);
+  gym.tasks.push(gymTaskOne);
+  gym.tasks.push(gymTaskTwo);
+  gym.tasks.push(gymTaskThree);
 
-study.tasks.push(studyTaskOne);
-study.tasks.push(studyTaskTwo);
-study.tasks.push(studyTaskThree);
+  dance.tasks.push(danceTaskOne);
+  dance.tasks.push(danceTaskTwo);
+  dance.tasks.push(danceTaskThree);
 
-loadHomePage();
+  study.tasks.push(studyTaskOne);
+  study.tasks.push(studyTaskTwo);
+  study.tasks.push(studyTaskThree);
+}
 
-//Show all tasks by default
-homeCategoryButtons[0].click();
-// lastBtnClicked = homeCategoryButtons[0];
-
-function addToProjects(project){
+function addToProjects(project) {
   allProjects.push(project);
 }
+
+addDummyContent();
+loadHomePage();
+
+//Show all tasks by default on home page load
+homeCategoryButtons[0].click();
 
 export { allProjects, addToProjects };

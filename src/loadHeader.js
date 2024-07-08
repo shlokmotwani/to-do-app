@@ -14,23 +14,27 @@ let logoTextRight;
 
 function loadHeader() {
   header = document.createElement("div");
-  header.id = "div-header";
   headerLeft = document.createElement("div");
-  headerLeft.id = "div-header-left";
   headerCenter = document.createElement("div");
-  headerCenter.id = "div-header-center";
   headerRight = document.createElement("div");
-  headerRight.id = "div-header-right";
-
   hideSidebarBtn = document.createElement("button");
+  logoImage = document.createElement("div");
+  logoText = document.createElement("div");
+  logoTextLeft = document.createElement("span");
+  logoTextRight = document.createElement("span");
+
+  header.id = "div-header";
+  headerLeft.id = "div-header-left";
+  headerCenter.id = "div-header-center";
+  headerRight.id = "div-header-right";
   hideSidebarBtn.id = "hide-sidebar-btn";
+
   headerLeft.appendChild(hideSidebarBtn);
   header.appendChild(headerLeft);
   header.appendChild(headerCenter);
   header.appendChild(headerRight);
 
   hideSidebarBtn.addEventListener("click", () => {
-    console.log("Hide Sidebar Button clicked");
     if (isSidebarVisible) {
       isSidebarVisible = false;
       sidebar.style.cssText = `
@@ -43,7 +47,6 @@ function loadHeader() {
       "hdr hdr"
       "cnt cnt"
       "ftr ftr";`;
-
     } else {
       isSidebarVisible = true;
       sidebar.style.cssText = `
@@ -59,20 +62,18 @@ function loadHeader() {
     }
   });
 
-  logoImage = document.createElement("div");
   logoImage.id = "logo-image";
-  logoText = document.createElement("div");
   logoText.id = "logo-text";
-  logoTextLeft = document.createElement("span");
   logoTextLeft.id = "logo-text-left";
-  logoTextLeft.textContent = "To";
-  logoTextLeft.style.color = "wheat";
-  logoTextRight = document.createElement("span");
   logoTextRight.id = "logo-text-right";
+
+  logoTextLeft.textContent = "To";
   logoTextRight.textContent = "Do";
+
+  logoTextLeft.style.color = "wheat";
+
   logoText.appendChild(logoTextLeft);
   logoText.appendChild(logoTextRight);
-
   headerCenter.appendChild(logoImage);
   headerCenter.appendChild(logoText);
 }

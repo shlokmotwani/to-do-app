@@ -21,4 +21,4 @@ function loadHomePage() {
   document.body.appendChild(homePage);
 }
 
-export { homePage, loadHomePage};
+export { homePage, loadHomePage };
