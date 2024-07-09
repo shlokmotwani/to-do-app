@@ -1,8 +1,8 @@
 import { allProjects } from "./index";
-import { setTasksToLoad, titleText } from "./loadContent";
+import { filterTasksToBeLoaded, titleText } from "./loadContent";
 import { loadHomePage } from "./loadHomePage";
 import { lastBtnClicked } from "./loadSidebar";
-import { format } from "date-fns";
+import { add, format, getDate, getMonth, getYear } from "date-fns";
 
 let modal;
 let dropDownInner;
@@ -25,7 +25,8 @@ function createTask(
   };
 }
 
-function createNewTaskModal() {
+function createNewTaskModal(task) {
+  modal = "";
   modal = document.createElement("div");
   modal.id = "new-task-modal";
   modal.classList.add("modal");
@@ -60,7 +61,6 @@ function createNewTaskModal() {
   notes.type = "text";
   isCompleted.type = "text";
 
-  projectCategory.placeholder = "Project Category";
   dueDate.placeholder = "dueDate";
   priority.placeholder = "Priority";
   notes.placeholder = "Notes";
@@ -70,34 +70,121 @@ function createNewTaskModal() {
   cancelBtn.textContent = "Cancel";
 
   addBtn.addEventListener("click", () => {
-    if (taskName.value) {
-      let date = dueDate.value;
-      date = format(date, "dd/LLL/yyyy");
-      let task = createTask(
-        taskName.value,
-        desc.value,
-        date,
-        priority.value,
-        notes.value,
-        isCompleted.value
-      );
-    
-      allProjects.forEach((element) => {
-        if (element.name == dropDownInner.value) {
-          element.tasks.push(task);
-        }
-      });
-      setTasksToLoad(lastBtnClicked);
-      document.body.innerHTML = "";
-      loadHomePage();
-      titleText.textContent = lastBtnClicked;
+    // the button for Add and Update is the same
+    // so the if condition checks whether the button is Add or Update
+    // at the moment and based on that, it either creates a new entry or
+    // modifies an existing one.
+    // if the "if clause" is not there in the code, the eventListener
+    // gets executed twice!
+    if(addBtn.textContent == "Add"){
+      if (taskName.value) {
+        let date = dueDate.value;
+        date = format(date, "dd/LLL/yyyy");
+        let task = createTask(
+          taskName.value,
+          desc.value,
+          date,
+          priority.value,
+          notes.value,
+          isCompleted.value
+        );
+  
+        allProjects.forEach((element) => {
+          if (element.name == dropDownInner.value) {
+            element.tasks.push(task);
+          }
+        });
+        filterTasksToBeLoaded(lastBtnClicked);
+        document.body.innerHTML = "";
+        loadHomePage();
+        titleText.textContent = lastBtnClicked;
+      }
+      modal.style.display = "none";
     }
-    modal.style.display = "none";
   });
 
   cancelBtn.addEventListener("click", () => {
     modal.style.display = "none";
   });
+
+  // fill up modal based on the values of task on
+  // which the edit button is clicked
+  if (task) {
+
+    addBtn.textContent = "Update";
+
+    let date = new Date(task.dueDate);
+    let day = getDate(date);
+    let month = getMonth(date) + 1;
+    let year = getYear(date);
+    
+    //formatting required for changing dueDate.value
+    if(day < 10){
+      day = "0" + day;
+    }
+
+    if(month < 10){
+      month = ("0" + month);
+    }
+
+    taskName.value = task.title;
+    desc.value = task.desc;
+
+    let indexOfCategory;
+    let indexOfTask;
+    allProjects.forEach((element)=>{
+      // if(element.name == lastBtnClicked){
+      //   indexOfCategory = allProjects.indexOf(element);
+      // }
+      console.log(element.name);
+      for(let i=0; i<element.tasks.length; i++){
+        console.log(element.tasks[i].title);
+        if(element.tasks[i] == task){
+          indexOfCategory = allProjects.indexOf(element);
+          indexOfTask = i;
+        }
+      }
+    });
+
+    if(indexOfCategory){
+      projectCategory.firstChild.options[indexOfCategory].selected = true;
+    }
+    
+    
+    dueDate.value = `${year}-${month}-${day}`;
+    priority.value = task.priority;
+    notes.value = task.notes;
+    isCompleted.value = task.isCompleted;
+
+    addBtn.addEventListener("click", () => {
+      allProjects[indexOfCategory].tasks.splice(indexOfTask, 1);
+      if (taskName.value) {
+        let date = dueDate.value;
+        date = format(date, "dd/LLL/yyyy");
+        let task = createTask(
+          taskName.value,
+          desc.value,
+          date,
+          priority.value,
+          notes.value,
+          isCompleted.value
+        );
+  
+        allProjects.forEach((element) => {
+          if (element.name == dropDownInner.value) {
+            element.tasks.push(task);
+          }
+        });
+        filterTasksToBeLoaded(lastBtnClicked);
+        document.body.innerHTML = "";
+        loadHomePage();
+        titleText.textContent = lastBtnClicked;
+      }
+      modal.style.display = "none";
+    });
+
+
+  }
 
   inputDiv.appendChild(taskName);
   inputDiv.appendChild(desc);

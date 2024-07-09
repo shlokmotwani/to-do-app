@@ -1,5 +1,8 @@
 import { addToProjects } from "./index";
 import { loadHomePage } from "./loadHomePage";
+import { titleText } from "./loadContent";
+import { filterTasksToBeLoaded } from "./loadContent";
+import { loadTaskCards } from "./loadContent";
 
 let modal;
 
@@ -30,8 +33,11 @@ function createNewProjectModal() {
     if (projectName.value) {
       let proj = createProject(projectName.value);
       addToProjects(proj);
+      filterTasksToBeLoaded(projectName.value);
       document.body.innerHTML = "";
       loadHomePage();
+      titleText.textContent = projectName.value;
+      loadTaskCards();
     }
     modal.style.display = "none";
   });

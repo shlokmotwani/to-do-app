@@ -1,9 +1,10 @@
 import { header, loadHeader } from "./loadHeader";
 import { sidebar, loadSidebar } from "./loadSidebar";
-import { content, loadContent } from "./loadContent";
+import { content, loadContentStructure, loadTaskCards } from "./loadContent";
 import { footer, loadFooter } from "./loadFooter";
 
 let homePage;
+let modal;
 
 function loadHomePage() {
   homePage = null;
@@ -11,7 +12,8 @@ function loadHomePage() {
   homePage.id = "div-home-page";
   loadHeader();
   loadSidebar();
-  loadContent();
+  loadContentStructure();
+  loadTaskCards();
   loadFooter();
 
   homePage.appendChild(header);
@@ -21,4 +23,4 @@ function loadHomePage() {
   document.body.appendChild(homePage);
 }
 
-export { homePage, loadHomePage };
+export { homePage, loadHomePage, modal };

@@ -16,7 +16,7 @@ let LOW_PRIORITY_COLOR = "rgba(50,205,50, 0.8)";
 let MED_PRIORITY_COLOR = "rgba(252, 173, 3, 0.8)";
 let HIGH_PRIORITY_COLOR = "rgba(252, 44, 3, 0.7)";
 
-function loadContent() {
+function loadContentStructure() {
   let plusIcon;
   let titleDiv;
 
@@ -51,11 +51,9 @@ function loadContent() {
   innerDiv.appendChild(tasksDiv);
   innerDiv.appendChild(addNewTaskBtn);
   content.appendChild(innerDiv);
-
-  loadTaskCards();
 }
 
-function setTasksToLoad(projectName) {
+function filterTasksToBeLoaded(projectName) {
   tasksToLoad = [];
 
   switch (projectName) {
@@ -74,7 +72,7 @@ function setTasksToLoad(projectName) {
     default:
       loadProjectTasks(projectName);
   }
-}
+
 
 function loadAllTasks() {
   for (let i = 0; i < allProjects.length; i++) {
@@ -126,6 +124,8 @@ function loadProjectTasks(projectName) {
     }
   }
 }
+}
+
 
 function loadTaskCards() {
   tasksDiv.innerHTML = "";
@@ -168,8 +168,8 @@ function loadTaskCards() {
     let editIcon = new Image();
     editIcon.src = editImage;
     editBtn.appendChild(editIcon);
-    editBtn.addEventListener("click", (event) => {
-      editTask(event);
+    editBtn.addEventListener("click", () => {
+      editTask(tasksToLoad[i]);
     });
 
     let deleteIcon = new Image();
@@ -177,7 +177,7 @@ function loadTaskCards() {
     deleteBtn.appendChild(deleteIcon);
     deleteBtn.addEventListener("click", (event) => {
       deleteTask(event);
-      setTasksToLoad(lastBtnClicked);
+      filterTasksToBeLoaded(lastBtnClicked);
       loadTaskCards();
     });
 
@@ -209,7 +209,17 @@ function loadTaskCards() {
   }
 }
 
-function editTask(event) {}
+function editTask(task) {
+  let modal = createNewTaskModal(task);
+  modal.style.display = "block";
+  content.append(modal);
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+}
 
 function deleteTask(event) {
   let taskTitle =
@@ -223,8 +233,8 @@ function deleteTask(event) {
   }
 }
 
-function loadTaskModal() {
-  let modal = createNewTaskModal();
+function loadTaskModal(task) {
+  let modal = createNewTaskModal(task);
   modal.style.display = "block";
   content.append(modal);
 
@@ -233,13 +243,14 @@ function loadTaskModal() {
       modal.style.display = "none";
     }
   };
+  return modal;
 }
 
 export {
   content,
-  loadContent,
+  loadContentStructure,
   titleText,
-  setTasksToLoad,
+  filterTasksToBeLoaded,
   loadTaskCards,
   tasksToLoad,
 };

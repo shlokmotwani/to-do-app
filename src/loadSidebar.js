@@ -7,10 +7,7 @@ import plusImage from "./icons/plus-box-outline.svg";
 
 import { allProjects } from "./index.js";
 import { createNewProjectModal } from "./project.js";
-import { content } from "./loadContent.js";
-import { titleText } from "./loadContent.js";
-import { setTasksToLoad } from "./loadContent.js";
-import { loadTaskCards } from "./loadContent.js";
+import { content, titleText , filterTasksToBeLoaded, loadTaskCards} from "./loadContent.js";
 
 let sidebar;
 let homeCard;
@@ -83,7 +80,7 @@ function loadHomeCard() {
 
     category.addEventListener("click", () => {
       titleText.textContent = homeCategories[i].text;
-      setTasksToLoad(homeCategories[i].text);
+      filterTasksToBeLoaded(homeCategories[i].text);
       loadTaskCards();
       lastBtnClicked = homeCategories[i].text;
     });
@@ -122,7 +119,7 @@ function loadProjectCard() {
 
     project.addEventListener("click", () => {
       titleText.textContent = projectText.textContent;
-      setTasksToLoad(projectText.textContent);
+      filterTasksToBeLoaded(projectText.textContent);
       loadTaskCards();
       lastBtnClicked = titleText.textContent;
     });
