@@ -94,6 +94,7 @@ function createNewTaskModal(task) {
             element.tasks.push(task);
           }
         });
+        localStorage.setItem("allProjects", allProjects);
         filterTasksToBeLoaded(lastBtnClicked);
         document.body.innerHTML = "";
         loadHomePage();
@@ -180,6 +181,7 @@ function createNewTaskModal(task) {
         loadHomePage();
         titleText.textContent = lastBtnClicked;
       }
+      localStorage.setItem("allProjects", allProjects);
       modal.style.display = "none";
     });
 

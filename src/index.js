@@ -6,7 +6,15 @@ import "./style.css";
 import "./modal.css";
 import { format } from "date-fns";
 
-let allProjects = [];
+let allProjects;
+
+if(localStorage.getItem("allProjects")){
+  allProjects = Array(localStorage.getItem("allProjects"));
+}
+else{
+  allProjects = [];
+  // localStorage.setItem("allProjects", allProjects);
+}
 
 function addDummyContent() {
   let gym = createProject("Gym");
@@ -93,16 +101,16 @@ function addDummyContent() {
 
 
   gym.tasks.push(gymTaskOne);
-  gym.tasks.push(gymTaskTwo);
-  gym.tasks.push(gymTaskThree);
+  // gym.tasks.push(gymTaskTwo);
+  // gym.tasks.push(gymTaskThree);
 
   dance.tasks.push(danceTaskOne);
-  dance.tasks.push(danceTaskTwo);
-  dance.tasks.push(danceTaskThree);
+  // dance.tasks.push(danceTaskTwo);
+  // dance.tasks.push(danceTaskThree);
 
   study.tasks.push(studyTaskOne);
-  study.tasks.push(studyTaskTwo);
-  study.tasks.push(studyTaskThree);
+  // study.tasks.push(studyTaskTwo);
+  // study.tasks.push(studyTaskThree);
 }
 
 function addToProjects(project) {
@@ -114,5 +122,18 @@ loadHomePage();
 
 //Show all tasks by default on home page load
 homeCategoryButtons[0].click();
+
+// localStorage.clear();
+if(localStorage.getItem("obj")){
+  console.log("true");
+}
+else{
+  localStorage.setItem("obj", [5, 6, 7]);
+  console.log("All set");
+  let x = localStorage.getItem("obj");
+  console.log(x + " ---- " + typeof x);
+  x = Array(x);
+  console.log(typeof x);
+}
 
 export { allProjects, addToProjects };
