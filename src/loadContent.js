@@ -228,7 +228,7 @@ function deleteTask(event) {
     for (let j = 0; j < allProjects[i].tasks.length; j++) {
       if (allProjects[i].tasks[j].title == taskTitle) {
         allProjects[i].tasks.splice(j, 1);
-        localStorage.setItem("allProjects", allProjects);
+        localStorage.setItem("allProjects", JSON.stringify(allProjects));
       }
     }
   }

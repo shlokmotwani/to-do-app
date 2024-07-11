@@ -2,7 +2,7 @@ import { allProjects } from "./index";
 import { filterTasksToBeLoaded, titleText } from "./loadContent";
 import { loadHomePage } from "./loadHomePage";
 import { lastBtnClicked } from "./loadSidebar";
-import { add, format, getDate, getMonth, getYear } from "date-fns";
+import { format, getDate, getMonth, getYear } from "date-fns";
 
 let modal;
 let dropDownInner;
@@ -94,7 +94,7 @@ function createNewTaskModal(task) {
             element.tasks.push(task);
           }
         });
-        localStorage.setItem("allProjects", allProjects);
+        localStorage.setItem("allProjects", JSON.stringify(allProjects));
         filterTasksToBeLoaded(lastBtnClicked);
         document.body.innerHTML = "";
         loadHomePage();
@@ -181,7 +181,7 @@ function createNewTaskModal(task) {
         loadHomePage();
         titleText.textContent = lastBtnClicked;
       }
-      localStorage.setItem("allProjects", allProjects);
+      localStorage.setItem("allProjects", JSON.stringify(allProjects));
       modal.style.display = "none";
     });
 

@@ -1,4 +1,4 @@
-import { addToProjects } from "./index";
+import { addToProjects, allProjects} from "./index";
 import { loadHomePage } from "./loadHomePage";
 import { titleText } from "./loadContent";
 import { filterTasksToBeLoaded } from "./loadContent";
